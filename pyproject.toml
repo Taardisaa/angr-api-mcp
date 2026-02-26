@@ -1,0 +1,60 @@
+[project]
+name = "angr-api-mcp"
+version = "0.1.0"
+description = "MCP server for angr binary analysis API workflow retrieval"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    {name = "Hao Ren", email = "136665562@qq.com"},
+]
+keywords = ["mcp", "angr", "binary-analysis", "reverse-engineering", "api", "workflow"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Debuggers",
+]
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "tree-sitter==0.21.3",
+    "tree-sitter-languages>=1.10.0",
+    "chromadb>=0.5.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "ruff>=0.1.0",
+    "build>=1.0",
+    "twine>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Taardisaa/angr-api-mcp"
+Repository = "https://github.com/Taardisaa/angr-api-mcp"
+
+[project.scripts]
+angr-api-mcp = "angr_api_mcp.server:run_server"
+angr-api-mcp-admin = "angr_api_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/angr_api_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+src = ["src", "tests"]
